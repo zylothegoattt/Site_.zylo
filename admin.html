@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bar Plage - Panel Administration Professionnel</title>
+
+    <style>
+        body {
+            background-color: #071A24;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #f5f6fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: #0B2633;
+            border-right: 1px solid #174958;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        .sidebar h2 {
+            color: #19D3C5;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 0;
+            margin-bottom: 40px;
+            text-align: center;
+            border-bottom: 2px solid #174958;
+            padding-bottom: 15px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .sidebar-menu li a {
+            color: #9DB4BC;
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 6px;
+            display: block;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid transparent;
+        }
+
+        .sidebar-menu li a:hover,
+        .sidebar-menu li a.active {
+            color: #19D3C5;
+            background: rgba(25, 211, 197, 0.12);
+            border-color: #19D3C5;
+            padding-left: 20px;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            max-width: 1100px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .header-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        .header-panel h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #19D3C5;
+            margin: 0;
+        }
+
+        .status-badge {
+            background: rgba(25, 211, 197, 0.12);
+            color: #19D3C5;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid rgba(25, 211, 197, 0.3);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 35px;
+        }
+
+        .card {
+            background: #0F3340;
+            border: 1px solid #174958;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+            box-sizing: border-box;
+        }
+
+        .card-full {
+            grid-column: 1 / -1;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #19D3C5;
+            border-bottom: 1px solid #174958;
+            padding-bottom: 12px;
+        }
+
+        .ca-box {
+            background: #0B2633;
+            border: 1px solid #174958;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .ca-box p {
+            margin: 0;
+            color: #9DB4BC;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .ca-box .amount {
+            font-size: 46px;
+            color: #19D3C5;
+            font-weight: 800;
+            margin-top: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #9DB4BC;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background: #091F2A;
+            border: 1px solid #174958;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: #19D3C5;
+            color: #071A24;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #12313D;
+            color: #19D3C5;
+            padding: 14px;
+            border: 1px solid #174958;
+            text-align: left;
+        }
+
+        td {
+            padding: 14px;
+            border: 1px solid #174958;
+            background-color: #0C2732;
+        }
+
+        .log-flux {
+            background: #06151D;
+            border: 1px solid #174958;
+            border-radius: 6px;
+            padding: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .action-footer {
+            margin-top: 40px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            border-top: 1px solid #174958;
+            padding-top: 25px;
+        }
+
+        .btn-danger {
+            background: #12313D;
+            color: #19D3C5;
+            border: 1px solid #174958;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-logout {
+            background: #12313D;
+            color: #19D3C5;
+            border: 1px solid #174958;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+
+        <h2>Bar Plage</h2>
+
+        <ul class="sidebar-menu">
+
+            <li>
+                <a href="admin.html" class="active">
+                    Espace Direction
+                </a>
+            </li>
+
+            <li>
+                <a href="employe.html">
+                    Interface Serveur
+                </a>
+            </li>
+
+            <li>
+                <a href="index.html">
+                    Page d'accueil / Déconnexion
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <div
+        id="panel-suivi-employes"
+        class="main-content"
+    >
+
+        <div class="header-panel">
+
+            <h1>
+                TABLEAU DE BORD EXÉCUTIF
+            </h1>
+
+            <div class="status-badge">
+                SESSION DIRIGEANT ACTIVE
+            </div>
+
+        </div>
+
+        <div class="ca-box">
+
+            <p>
+                Chiffre d'Affaires Global Bar Plage
+            </p>
+
+            <div
+                id="ca-total"
+                class="amount"
+            >
+                0 $
+            </div>
+
+        </div>
+
+        <div class="dashboard-grid">
+
+            <div class="card card-full">
+
+                <h3>
+                    📊 Suivi Économique des Employés
+                </h3>
+
+                <div style="overflow-x:auto;">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Identifiant Collaborateur
+                                </th>
+
+                                <th style="text-align:center;">
+                                    Volumes Ventes
+                                </th>
+
+                                <th style="text-align:right;">
+                                    Rentabilité Générée
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="corps-tableau-ca">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+                    🔑 Gestion des Accès et Recrutement
+                </h3>
+
+                <form id="registerForm">
+
+                    <div class="form-group">
+
+                        <label>
+                            Identifiant utilisateur unique :
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newUsername"
+                            class="form-control"
+                            placeholder="Ex: Employe2"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Mot de passe réseau sécurisé :
+                        </label>
+
+                        <input
+                            type="password"
+                            id="newPassword"
+                            class="form-control"
+                            placeholder="••••••••"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Habilitation / Rôle système :
+                        </label>
+
+                        <select
+                            id="newRole"
+                            class="form-control"
+                        >
+
+                            <option value="employe">
+                                Employé (Saisie des ventes)
+                            </option>
+
+                            <option value="entreprise">
+                                Entreprise Partenaire (Espace Commandes)
+                            </option>
+
+                            <option value="admin">
+                                Administrateur / Boss (Accès total)
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn-submit"
+                    >
+                        Créer et Valider les Accès
+                    </button>
+
+                </form>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+                    📜 Journal de Sécurité & Flux en direct
+                </h3>
+
+                <div
+                    id="archives-globales"
+                    class="log-flux"
+                >
+
+                    <p style="
+                        color:#9DB4BC;
+                        margin:0;
+                        font-size:14px;
+                        font-style:italic;
+                    ">
+                        Aucun flux de données détecté pour le moment.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="card card-full">
+
+                <h3>
+                    📦 Commandes des Entreprises Partenaires
+                </h3>
+
+                <div style="overflow-x:auto;">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Entreprise
+                                </th>
+
+                                <th>
+                                    Contenu Commande
+                                </th>
+
+                                <th style="text-align:center;">
+                                    Total Articles
+                                </th>
+
+                                <th style="text-align:center;">
+                                    Statut
+                                </th>
+
+                                <th style="text-align:right;">
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="corps-tableau-commandes">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="action-footer">
+
+            <button
+                onclick="window.remiseAZeroFiches()"
+                class="btn-danger"
+            >
+                Purger la Comptabilité
+            </button>
+
+            <a
+                href="index.html"
+                class="btn-logout"
+            >
+                Fermer la Session
+            </a>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

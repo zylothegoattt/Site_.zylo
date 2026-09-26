@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Plage - Connexion</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Bar Plage</h2>
+        <p>Panel de Gestion Intranet</p>
+        
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="username">Identifiant</label>
+                <input type="text" id="username" required placeholder="Ex: John Doe">
+            </div>
+            
+            <div class="input-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" required placeholder="••••••••">
+            </div>
+            
+            <button type="submit">Se connecter</button>
+        </form>
+        <div style="text-align: center; margin-top: 20px; border-top: 1px solid #1f3141; padding-top: 15px;">
+    <a href="login-entreprises.html" style="color: #ffaa00; text-decoration: none; font-size: 14px; font-weight: bold;">
+        🏢 Vous êtes une Entreprise Partenaire ? Cliquez ici
+    </a>
+</div>
+        <p id="error-message" class="error"></p>
+    </div>
+
+    <script src="script.js"></script>
+<script>
+// INTERCEPTION DE LA CONNEXION POUR ÉVITER LE MENU EMPLOYÉ
+document.getElementById('loginForm')?.addEventListener('submit', function(e) {
+    const usernameInput = document.getElementById('username')?.value;
+    const passwordInput = document.getElementById('password')?.value;
+    
+    // Récupérer les comptes créés par le boss
+    const comptes = JSON.parse(localStorage.getItem('comptesUtilisateurs')) || [];
+    
+    // Chercher si le compte existe et si c'est une entreprise
+    const compteTrouve = comptes.find(u => u.username === usernameInput && u.password === passwordInput);
+    
+    if (compteTrouve && compteTrouve.role === 'entreprise') {
+        e.preventDefault(); // Bloque la redirection vers l'écran employé
+        e.stopPropagation();
+        
+        // Connecte l'entreprise proprement
+        localStorage.setItem('entrepriseConnectee', compteTrouve.username);
+        
+        // Redirection directe vers l'espace commande propre
+        window.location.href = 'commandes.html';
+    }
+}, { capture: true }); // "capture: true" permet de passer avant ton script principal
+</script>
+</body>
+</html>
