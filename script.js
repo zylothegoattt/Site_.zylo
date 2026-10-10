@@ -35,8 +35,6 @@ function appliquerThemeEtNom() {
             .replace("Lucky Plucker", "Bar Plage");
     }
 
-    // ====== LOGO ======
-    // bar-plage.png doit être dans le même dossier que script.js
     const logoSrc = "bar-plage.png";
     const sidebar = document.querySelector('.sidebar');
 
@@ -53,7 +51,6 @@ function appliquerThemeEtNom() {
         sidebar.insertBefore(logo, sidebar.firstChild);
     }
 
-    // ====== THÈME UNIQUE BAR PLAGE ======
     let styleBarPlage = document.getElementById('theme-bar-plage-style');
 
     if (!styleBarPlage) {
@@ -1057,7 +1054,6 @@ function chargerComptaAdmin() {
         );
     }
 
-    // ====== COMMANDES ENTREPRISES DANS LE CA GLOBAL ======
     const commandes =
         JSON.parse(
             localStorage.getItem('commandesGlobales')
@@ -1175,7 +1171,6 @@ window.remiseAZeroFiches = function() {
     }
 };
 
-// ====== LANCEMENT GLOBAL ======
 document.addEventListener(
     "DOMContentLoaded",
     function() {
@@ -1196,7 +1191,6 @@ document.addEventListener(
     }
 );
 
-// ====== SUIVI DES COMMANDES ENTREPRISES ======
 function afficherCommandesPourAdmin() {
     const tbody =
         document.getElementById(
@@ -1498,7 +1492,6 @@ window.supprimerCommandeTroll =
         }
     };
 
-// ====== ACTUALISATION AUTOMATIQUE ADMIN ======
 if (
     document.getElementById(
         'panel-suivi-employes'
@@ -1520,7 +1513,6 @@ if (
     );
 }
 
-// ====== AUTOMATISATION COMMANDES ENTREPRISES ======
 if (
     window.location.pathname.includes(
         'commandes.html'
