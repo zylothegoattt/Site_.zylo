@@ -77,22 +77,17 @@ document.getElementById('formEntreprise').addEventListener('submit', function(e)
     const inputUser = document.getElementById('entUser').value.trim().toLowerCase();
     const inputPass = document.getElementById('entPass').value.trim();
 
-    // Correction : Récupérer la vraie clé "comptes" de ton site
     const baseComptes = JSON.parse(localStorage.getItem('comptes')) || [];
     
-    // Recherche précise dans la structure de ton script
     const compteTrouve = baseComptes.find(u => {
         const nomCompte = (u.username || "").toLowerCase();
         const mdpCompte = String(u.password || "");
-        
-        // On vérifie aussi le rôle pour être sûr qu'un employé ne passe pas par ici
         const roleCompte = (u.role || "").toLowerCase();
 
         return nomCompte === inputUser && mdpCompte === inputPass && (roleCompte === 'entreprise' || roleCompte.includes('entre'));
     });
 
     if (compteTrouve) {
-        // Sauvegarder le nom pour l'espace commande
         localStorage.setItem('entrepriseConnectee', compteTrouve.username);
         window.location.href = 'commandes.html';
     } else {
