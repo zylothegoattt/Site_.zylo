@@ -19,7 +19,7 @@ if (!articlesBoutique || articlesBoutique.length === 0) {
     localStorage.setItem('articlesBoutique', JSON.stringify(articlesBoutique));
 }
 
-// ====== APPLICATION DU NOM, DU LOGO ET DU THÈME UNIQUE BAR PLAGE ======
+// ====== APPLICATION DU THÈME BLANC CASSÉ, ORANGE & BLEU LAGON (BAR PLAGE) ======
 function appliquerThemeEtNom() {
     const sidebarTitle = document.querySelector('.sidebar h2');
     if (sidebarTitle) sidebarTitle.textContent = "Bar Plage";
@@ -59,14 +59,15 @@ function appliquerThemeEtNom() {
 
         styleBarPlage.textContent = `
             :root {
-                --bp-bg: #071A24;
-                --bp-bg2: #0B2633;
-                --bp-card: #0F3340;
-                --bp-border: #174958;
-                --bp-main: #19D3C5;
-                --bp-main-soft: rgba(25, 211, 197, 0.12);
-                --bp-text: #FFFFFF;
-                --bp-muted: #9DB4BC;
+                --bp-bg: #f7f5f0;
+                --bp-bg2: #ffffff;
+                --bp-card: #ffffff;
+                --bp-border: #e2ddd8;
+                --bp-main: #0097b2;
+                --bp-accent: #ff7648;
+                --bp-main-soft: rgba(0, 151, 178, 0.08);
+                --bp-text: #2c3e50;
+                --bp-muted: #7f8c8d;
             }
 
             body {
@@ -81,6 +82,7 @@ function appliquerThemeEtNom() {
             .ca-box {
                 background: var(--bp-bg2) !important;
                 border-color: var(--bp-border) !important;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05) !important;
             }
 
             .sidebar h2,
@@ -89,11 +91,15 @@ function appliquerThemeEtNom() {
             h3,
             h4,
             h5,
-            label,
             .status-badge,
             #ca-total,
             .amount {
+                color: var(--bp-accent) !important;
+            }
+
+            label {
                 color: var(--bp-main) !important;
+                font-weight: bold !important;
             }
 
             .bar-plage-logo {
@@ -112,16 +118,16 @@ function appliquerThemeEtNom() {
 
             .sidebar-menu li a:hover,
             .sidebar-menu li a.active {
-                color: var(--bp-main) !important;
+                color: var(--bp-accent) !important;
                 background: var(--bp-main-soft) !important;
-                border-color: var(--bp-main) !important;
+                border-color: var(--bp-accent) !important;
             }
 
             input,
             select,
             textarea,
             .form-control {
-                background: #091F2A !important;
+                background: #faf9f6 !important;
                 color: var(--bp-text) !important;
                 border-color: var(--bp-border) !important;
             }
@@ -131,31 +137,32 @@ function appliquerThemeEtNom() {
             textarea:focus {
                 border-color: var(--bp-main) !important;
                 outline: none !important;
-                box-shadow: 0 0 0 2px rgba(25, 211, 197, 0.12) !important;
+                box-shadow: 0 0 0 3px rgba(0, 151, 178, 0.1) !important;
             }
 
             .btn-submit,
             #loginForm button,
             button[type="submit"] {
-                background: var(--bp-main) !important;
-                color: #071A24 !important;
+                background: linear-gradient(90deg, #ff7648 0%, #ffa85c 100%) !important;
+                color: #ffffff !important;
                 border: none !important;
+                box-shadow: 0 4px 12px rgba(255, 118, 72, 0.2) !important;
             }
 
             .btn-submit:hover,
             #loginForm button:hover,
             button[type="submit"]:hover {
-                background: #22E6D7 !important;
+                opacity: 0.9 !important;
             }
 
             table th {
-                background: #12313D !important;
+                background: #f0ece6 !important;
                 color: var(--bp-main) !important;
                 border-color: var(--bp-border) !important;
             }
 
             table td {
-                background: #0C2732 !important;
+                background: #ffffff !important;
                 color: var(--bp-text) !important;
                 border-color: var(--bp-border) !important;
             }
@@ -163,17 +170,19 @@ function appliquerThemeEtNom() {
             .status-badge {
                 background: var(--bp-main-soft) !important;
                 border-color: var(--bp-main) !important;
+                color: var(--bp-main) !important;
             }
 
             .log-flux {
-                background: #06151D !important;
+                background: #faf9f6 !important;
                 border-color: var(--bp-border) !important;
+                color: var(--bp-text) !important;
             }
 
             .btn-danger,
             .btn-logout {
-                background: #12313D !important;
-                color: var(--bp-main) !important;
+                background: #f0ece6 !important;
+                color: var(--bp-accent) !important;
                 border-color: var(--bp-border) !important;
             }
         `;
@@ -245,7 +254,7 @@ if (saleForm) {
         subText.innerHTML =
             `Espace Employé — Enregistrement des Ventes ` +
             `(Connecté en tant que : ` +
-            `<span id="nom-employe" style="color:#fff; font-weight:bold;">` +
+            `<span id="nom-employe" style="color:#ff7648; font-weight:bold;">` +
             `${employeConnecte.username}</span>)`;
     }
 
@@ -449,7 +458,7 @@ function afficherListeComptes() {
 
         zoneListe.style.marginTop = '25px';
         zoneListe.style.borderTop =
-            '1px solid #174958';
+            '1px solid #e2ddd8';
 
         zoneListe.style.paddingTop = '15px';
 
@@ -462,7 +471,7 @@ function afficherListeComptes() {
         JSON.parse(localStorage.getItem('comptes')) || [];
 
     zoneListe.innerHTML =
-        `<h4 style="margin:0 0 15px 0; color:#19D3C5; font-size:15px; text-transform:uppercase;">
+        `<h4 style="margin:0 0 15px 0; color:#0097b2; font-size:15px; text-transform:uppercase;">
             👥 Liste des comptes actifs
         </h4>`;
 
@@ -472,24 +481,24 @@ function afficherListeComptes() {
 
         item.style =
             'display:flex; justify-content:space-between; ' +
-            'align-items:center; background:#091F2A; ' +
+            'align-items:center; background:#faf9f6; ' +
             'padding:10px; border-radius:6px; ' +
             'margin-bottom:10px; font-size:14px; ' +
-            'border:1px solid #174958;';
+            'border:1px solid #e2ddd8;';
 
         item.innerHTML = `
             <div>
-                <strong style="color:#fff;">
+                <strong style="color:#2c3e50;">
                     ${compte.username}
                 </strong>
 
-                <span style="color:#19D3C5; font-size:12px;">
+                <span style="color:#0097b2; font-size:12px;">
                     (${compte.role})
                 </span>
 
                 <br>
 
-                <span style="color:#19D3C5; font-size:12px;">
+                <span style="color:#7f8c8d; font-size:12px;">
                     MDP: ${compte.password}
                 </span>
             </div>
@@ -498,8 +507,8 @@ function afficherListeComptes() {
                 <button
                     onclick="modifierMdp(${index})"
                     style="
-                        background:#19D3C5;
-                        color:#071A24;
+                        background:#0097b2;
+                        color:#ffffff;
                         border:none;
                         padding:5px 8px;
                         border-radius:4px;
@@ -513,9 +522,9 @@ function afficherListeComptes() {
                 <button
                     onclick="supprimerCompte(${index})"
                     style="
-                        background:#12313D;
-                        color:#19D3C5;
-                        border:1px solid #174958;
+                        background:#f0ece6;
+                        color:#ff7648;
+                        border:1px solid #e2ddd8;
                         padding:5px 8px;
                         border-radius:4px;
                         cursor:pointer;
@@ -556,19 +565,19 @@ function initialiserGestionArticlesAdmin() {
         zoneArticles.className = 'card';
 
         zoneArticles.style.background =
-            '#0B2633';
+            '#ffffff';
 
         zoneArticles.style.border =
-            '1px solid #174958';
+            '1px solid #e2ddd8';
 
         zoneArticles.style.borderRadius =
-            '10px';
+            '12px';
 
         zoneArticles.style.padding =
             '25px';
 
         zoneArticles.style.boxShadow =
-            '0 6px 18px rgba(0,0,0,0.4)';
+            '0 8px 24px rgba(0,0,0,0.05)';
 
         zoneArticles.style.boxSizing =
             'border-box';
@@ -588,8 +597,8 @@ function initialiserGestionArticlesAdmin() {
             margin-top:0;
             margin-bottom:20px;
             font-size:18px;
-            color:#19D3C5;
-            border-bottom:1px solid #174958;
+            color:#ff7648;
+            border-bottom:1px solid #e2ddd8;
             padding-bottom:12px;
         ">
             🛍️ Gestion des Articles & Prix
@@ -600,7 +609,7 @@ function initialiserGestionArticlesAdmin() {
             <label style="
                 display:block;
                 margin-bottom:5px;
-                color:#9DB4BC;
+                color:#0097b2;
                 font-size:14px;
             ">
                 Nom du produit :
@@ -617,7 +626,7 @@ function initialiserGestionArticlesAdmin() {
             <label style="
                 display:block;
                 margin-bottom:5px;
-                color:#9DB4BC;
+                color:#0097b2;
                 font-size:14px;
             ">
                 Prix de vente ($) :
@@ -635,7 +644,7 @@ function initialiserGestionArticlesAdmin() {
             <label style="
                 display:block;
                 margin-bottom:5px;
-                color:#9DB4BC;
+                color:#0097b2;
                 font-size:14px;
             ">
                 Prix Usine / Coût de revient ($) :
@@ -664,7 +673,7 @@ function initialiserGestionArticlesAdmin() {
             id="liste-items-boutique"
             style="
                 margin-top:15px;
-                border-top:1px solid #174958;
+                border-top:1px solid #e2ddd8;
                 padding-top:10px;
             "
         ></div>
@@ -739,7 +748,7 @@ function afficherListeItemsAdmin() {
         ) || [];
 
     divListe.innerHTML =
-        `<h5 style="color:#19D3C5; margin:10px 0;">
+        `<h5 style="color:#0097b2; margin:10px 0;">
             Articles actuels :
         </h5>`;
 
@@ -749,20 +758,20 @@ function afficherListeItemsAdmin() {
 
         row.style =
             'display:flex; justify-content:space-between; ' +
-            'align-items:center; background:#091F2A; ' +
+            'align-items:center; background:#faf9f6; ' +
             'padding:8px; border-radius:6px; ' +
-            'margin-bottom:5px; border:1px solid #174958; ' +
+            'margin-bottom:5px; border:1px solid #e2ddd8; ' +
             'font-size:13px;';
 
         row.innerHTML = `
             <span>
                 <strong>${art.nom}</strong>
                 -
-                <span style="color:#fff">
+                <span style="color:#2c3e50">
                     Vente: ${art.prix}$
                 </span>
                 |
-                <span style="color:#9DB4BC">
+                <span style="color:#7f8c8d">
                     Usine: ${art.prixUsine || 0}$
                 </span>
             </span>
@@ -770,9 +779,9 @@ function afficherListeItemsAdmin() {
             <button
                 onclick="supprimerItem(${index})"
                 style="
-                    background:#12313D;
-                    color:#19D3C5;
-                    border:1px solid #174958;
+                    background:#f0ece6;
+                    color:#ff7648;
+                    border:1px solid #e2ddd8;
                     padding:3px 6px;
                     border-radius:4px;
                     cursor:pointer;
@@ -891,7 +900,7 @@ function chargerComptaAdmin() {
             </th>
             <th style="
                 text-align:right;
-                color:#19D3C5;
+                color:#ff7648;
             ">
                 Total Bénéfices
             </th>
@@ -943,13 +952,13 @@ function chargerComptaAdmin() {
                 row.innerHTML = `
                     <td style="
                         padding:14px;
-                        border:1px solid #174958;
+                        border:1px solid #e2ddd8;
                     ">
                         👉
                         <strong>${employe}</strong>
                         <span style="
                             font-size:11px;
-                            color:#9DB4BC;
+                            color:#7f8c8d;
                         ">
                             (détail)
                         </span>
@@ -957,7 +966,7 @@ function chargerComptaAdmin() {
 
                     <td style="
                         padding:14px;
-                        border:1px solid #174958;
+                        border:1px solid #e2ddd8;
                         text-align:center;
                     ">
                         ${data.ventes}
@@ -965,20 +974,20 @@ function chargerComptaAdmin() {
 
                     <td style="
                         padding:14px;
-                        border:1px solid #174958;
+                        border:1px solid #e2ddd8;
                         text-align:right;
                         font-weight:bold;
-                        color:#ffffff;
+                        color:#2c3e50;
                     ">
                         ${data.ca} $
                     </td>
 
                     <td style="
                         padding:14px;
-                        border:1px solid #174958;
+                        border:1px solid #e2ddd8;
                         text-align:right;
                         font-weight:bold;
-                        color:#19D3C5;
+                        color:#ff7648;
                     ">
                         ${beneficeEmploye} $
                     </td>
@@ -998,7 +1007,7 @@ function chargerComptaAdmin() {
                     `<ul style="
                         margin:0;
                         padding-left:20px;
-                        color:#9DB4BC;
+                        color:#7f8c8d;
                         font-size:13px;
                         line-height:1.6;
                     ">`;
@@ -1011,7 +1020,7 @@ function chargerComptaAdmin() {
                         prod => {
                             htmlDetail += `
                                 <li>
-                                    <strong style="color:#fff;">
+                                    <strong style="color:#2c3e50;">
                                         ${data.detail[prod]}x
                                     </strong>
                                     ${prod}
@@ -1028,12 +1037,12 @@ function chargerComptaAdmin() {
 
                 subRow.innerHTML = `
                     <td colspan="4" style="
-                        background-color:#091F2A;
-                        border:1px solid #174958;
+                        background-color:#faf9f6;
+                        border:1px solid #e2ddd8;
                         padding:15px;
                     ">
                         <span style="
-                            color:#19D3C5;
+                            color:#0097b2;
                             font-size:12px;
                             font-weight:bold;
                             text-transform:uppercase;
@@ -1121,7 +1130,7 @@ function chargerComptaAdmin() {
         ) {
             zoneArchives.innerHTML =
                 `<p style="
-                    color:#9DB4BC;
+                    color:#7f8c8d;
                     margin:0;
                     font-size:14px;
                     font-style:italic;
@@ -1135,7 +1144,7 @@ function chargerComptaAdmin() {
                         document.createElement('p');
 
                     p.style.color =
-                        "#FFFFFF";
+                        "#2c3e50";
 
                     p.style.margin =
                         "5px 0";
@@ -1240,7 +1249,7 @@ function afficherCommandesPourAdmin() {
             `<tr>
                 <td colspan="6" style="
                     text-align:center;
-                    color:#9DB4BC;
+                    color:#7f8c8d;
                     font-style:italic;
                 ">
                     Aucune commande en attente.
@@ -1331,7 +1340,7 @@ function afficherCommandesPourAdmin() {
                 <td style="
                     text-align:center;
                     font-weight:bold;
-                    color:#19D3C5;
+                    color:#ff7648;
                 ">
                     ${totalCommande} $
                 </td>
@@ -1340,7 +1349,7 @@ function afficherCommandesPourAdmin() {
                     text-align:center;
                 ">
                     <span style="
-                        color:#19D3C5;
+                        color:#0097b2;
                         font-weight:bold;
                     ">
                         ${cmd.statut}
@@ -1361,8 +1370,8 @@ function afficherCommandesPourAdmin() {
                                     <button
                                         onclick="validerCommande(${index})"
                                         style="
-                                            background:#19D3C5;
-                                            color:#071A24;
+                                            background:#0097b2;
+                                            color:#ffffff;
                                             border:none;
                                             padding:6px 12px;
                                             border-radius:4px;
@@ -1375,7 +1384,7 @@ function afficherCommandesPourAdmin() {
                                 `
                                 : `
                                     <span style="
-                                        color:#9DB4BC;
+                                        color:#7f8c8d;
                                         font-size:12px;
                                     ">
                                         Terminé
@@ -1386,9 +1395,9 @@ function afficherCommandesPourAdmin() {
                         <button
                             onclick="supprimerCommandeTroll(${index})"
                             style="
-                                background:#12313D;
-                                color:#19D3C5;
-                                border:1px solid #174958;
+                                background:#f0ece6;
+                                color:#ff7648;
+                                border:1px solid #e2ddd8;
                                 padding:6px 10px;
                                 border-radius:4px;
                                 cursor:pointer;
@@ -1511,27 +1520,4 @@ if (
             );
         }
     );
-}
-
-if (
-    window.location.pathname.includes(
-        'commandes.html'
-    )
-) {
-    const entrepriseNom =
-        localStorage.getItem(
-            'entrepriseConnectee'
-        ) ||
-        "Entreprise Partenaire";
-
-    document
-        .getElementById('orderForm')
-        ?.addEventListener(
-            'submit',
-            function() {
-                window.entrepriseNomAutomatique =
-                    entrepriseNom;
-            },
-            true
-        );
 }
