@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tropical Heights - Espace Employé</title>
+    <title>Bar Plage - Espace Employé</title>
     <style>
         body {
-            background-color: #0b131a;
+            background-color: #f7f5f0; /* Blanc cassé effet sable */
             font-family: 'Segoe UI', Roboto, sans-serif;
-            color: #f5f6fa;
+            color: #2c3e50;
             margin: 0;
             padding: 20px;
             display: flex;
@@ -18,25 +18,26 @@
             box-sizing: border-box;
         }
         .container {
-            background: #121f2b;
-            border: 1px solid #1f3141;
-            border-radius: 10px;
+            background: #ffffff;
+            border: 1px solid #e2ddd8;
+            border-radius: 12px;
             padding: 30px;
             width: 100%;
             max-width: 600px;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
         }
         h1 {
-            color: #00ffcc;
+            color: #ff7648; /* Orange soleil */
             text-align: center;
-            font-size: 24px;
+            font-size: 26px;
             margin-top: 0;
             margin-bottom: 5px;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .sub {
             text-align: center;
-            color: #a5b1c2;
+            color: #7f8c8d;
             font-size: 14px;
             margin-bottom: 25px;
         }
@@ -46,29 +47,30 @@
         label {
             display: block;
             margin-bottom: 8px;
-            color: #00ffcc;
+            color: #0097b2; /* Bleu lagon */
             font-size: 14px;
             font-weight: bold;
         }
         .form-control {
             width: 100%;
             padding: 12px;
-            background: #09121a;
-            border: 1px solid #22374a;
+            background: #faf9f6;
+            border: 1px solid #dcd6ce;
             border-radius: 6px;
-            color: #ffffff;
+            color: #2c3e50;
             font-size: 15px;
             box-sizing: border-box;
         }
         .form-control:focus {
             outline: none;
-            border-color: #00ffcc;
+            border-color: #0097b2;
+            box-shadow: 0 0 0 3px rgba(0, 151, 178, 0.1);
         }
         .btn-submit {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(90deg, #00ffcc 0%, #00e6b8 100%);
-            color: #09121a;
+            background: linear-gradient(90deg, #ff7648 0%, #ffa85c 100%);
+            color: #ffffff;
             border: none;
             border-radius: 6px;
             font-weight: 700;
@@ -76,25 +78,31 @@
             cursor: pointer;
             text-transform: uppercase;
             margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(255, 118, 72, 0.2);
+            transition: opacity 0.2s;
+        }
+        .btn-submit:hover {
+            opacity: 0.9;
         }
         .footer-links {
             margin-top: 25px;
             text-align: center;
         }
         .btn-link {
-            color: #a5b1c2;
+            color: #0097b2;
             text-decoration: none;
             font-size: 14px;
+            font-weight: 600;
         }
         .btn-link:hover {
-            color: #fff;
+            color: #ff7648;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Tropical Heights</h1>
+        <h1>Bar Plage</h1>
         <div class="sub">Espace Employé — Enregistrement des Ventes</div>
 
         <form id="saleForm">
