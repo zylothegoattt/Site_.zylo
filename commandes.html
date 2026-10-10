@@ -45,7 +45,7 @@
                     <tr>
                         <td>Bouteille de Champagne</td>
                         <td>20</td>
-                        <td><span style="color: #ffaa00;">En attente de livraison</span></td>
+                        <td><span style="color: #ff7648;">En attente de livraison</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -66,34 +66,39 @@ function appliquerThemeEtNom() {
         document.title = document.title.replace("Tropical Heights", "Bar Plage");
     }
 
-    let styleOrange = document.getElementById('theme-orange-style');
-    if (!styleOrange) {
-        styleOrange = document.createElement('style');
-        styleOrange.id = 'theme-orange-style';
-        styleOrange.innerHTML = `
-            header h2, h3, label, th, td { color: #ff9f43 !important; }
+    let stylePlage = document.getElementById('theme-plage-style');
+    if (!stylePlage) {
+        stylePlage = document.createElement('style');
+        stylePlage.id = 'theme-plage-style';
+        stylePlage.innerHTML = `
+            header h2, h3 { color: #ff7648 !important; }
+            label { color: #0097b2 !important; font-weight: bold !important; }
+            th { color: #0097b2 !important; background: #f0ece6 !important; }
+            td { color: #2c3e50 !important; background: #ffffff !important; }
             input, select { 
-                background: #09121a !important; 
-                color: #fff !important; 
-                border: 1px solid #1f3141 !important; 
+                background: #faf9f6 !important; 
+                color: #2c3e50 !important; 
+                border: 1px solid #dcd6ce !important; 
             }
             input:focus, select:focus { 
-                border-color: #ff9f43 !important; 
+                border-color: #0097b2 !important; 
                 outline: none;
+                box-shadow: 0 0 0 3px rgba(0, 151, 178, 0.1);
             }
             button[type="submit"], #orderForm button { 
-                background: linear-gradient(90deg, #ff9f43 0%, #ff7675 100%) !important; 
-                color: #0b131a !important; 
+                background: linear-gradient(90deg, #ff7648 0%, #ffa85c 100%) !important; 
+                color: #ffffff !important; 
                 border: none !important;
                 font-weight: bold;
                 text-transform: uppercase;
                 cursor: pointer;
+                box-shadow: 0 4px 12px rgba(255, 118, 72, 0.2);
             }
             button[type="submit"]:hover, #orderForm button:hover {
-                background: linear-gradient(90deg, #ffb167 0%, #ff8a88 100%) !important;
+                opacity: 0.9 !important;
             }
         `;
-        document.head.appendChild(styleOrange);
+        document.head.appendChild(stylePlage);
     }
 }
 
@@ -144,16 +149,16 @@ function afficherMonPanierCourant() {
     tbody.innerHTML = '';
     
     if(panier.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#a5b1c2;">Votre panier est vide</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#7f8c8d;">Votre panier est vide</td></tr>';
         return;
     }
     
     panier.forEach((p, index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td style="color: #fff !important;">🛒 ${p.article}</td>
-            <td style="color: #fff !important;">${p.quantite}</td>
-            <td><button onclick="retirerDuPanier(${index})" style="background:#fc5c65; color:white; border:none; padding:3px 8px; border-radius:4px; cursor:pointer;">Enlever</button></td>
+            <td style="color: #2c3e50 !important;">🛒 ${p.article}</td>
+            <td style="color: #2c3e50 !important;">${p.quantite}</td>
+            <td><button onclick="retirerDuPanier(${index})" style="background:#f0ece6; color:#ff7648; border:1px solid #e2ddd8; padding:3px 8px; border-radius:4px; cursor:pointer; font-weight:600;">Enlever</button></td>
         `;
         tbody.appendChild(row);
     });
@@ -161,7 +166,7 @@ function afficherMonPanierCourant() {
     const rowValidation = document.createElement('tr');
     rowValidation.innerHTML = `
         <td colspan="3" style="text-align:center; padding-top: 15px;">
-            <button onclick="validerLeTicketFinal()" style="background: linear-gradient(90deg, #ff9f43 0%, #ff7675 100%) !important; color: #09121a; border:none; padding:10px 20px; border-radius:6px; font-weight:bold; cursor:pointer; width:100%; text-transform:uppercase;">
+            <button onclick="validerLeTicketFinal()" style="background: linear-gradient(90deg, #ff7648 0%, #ffa85c 100%) !important; color: #ffffff; border:none; padding:10px 20px; border-radius:6px; font-weight:bold; cursor:pointer; width:100%; text-transform:uppercase; box-shadow: 0 4px 12px rgba(255, 118, 72, 0.2);">
                 🚀 Envoyer la commande au ${enseigne}
             </button>
         </td>
@@ -195,7 +200,7 @@ window.validerLeTicketFinal = function() {
     afficherMonPanierCourant();
     
     const tbody = document.getElementById('ordersList');
-    if(tbody) tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#ff9f43; font-weight:bold;">✅ Commande envoyée avec succès !</td></tr>';
+    if(tbody) tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#ff7648; font-weight:bold;">✅ Commande envoyée avec succès !</td></tr>';
 };
 
 chargerCartePourClients();
